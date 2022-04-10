@@ -53,15 +53,35 @@ INNER JOIN dept_manager as dm
 ON d.dept_no = dm.dept_no;
 
 
------7.3.6
--- Create new table for retiring sales employees
+--SKILL DRILL NEW TABLE
 SELECT ce.emp_no,
-ce.first_name,
-ce.last_name,
-d.dept_name
--- INTO sales_dept_info
+	ce.first_name,
+	ce.last_name,
+	d.dept_name
+INTO dept_info_sales
 FROM current_emp as ce
-INNER JOIN dept_emp AS de
+INNER JOIN dept_emp as de
 ON (ce.emp_no = de.emp_no)
-INNER JOIN departments AS d
-ON (de.dept_no = d.dept_no);
+INNER JOIN departments as d
+ON (de.dept_no = d.dept_no)
+WHERE (d.dept_name = 'Sales')
+
+SELECT * FROM dept_info_sales
+
+
+
+--SKILL DRILL 2
+SELECT ce.emp_no,
+	ce.first_name,
+	ce.last_name,
+	d.dept_name
+INTO dept_info_sales_devlp
+FROM current_emp as ce
+INNER JOIN dept_emp as de
+ON (ce.emp_no = de.emp_no)
+INNER JOIN departments as d
+ON (de.dept_no = d.dept_no)
+WHERE d.dept_name in ('Sales','Development')
+ORDER BY d.dept_name DESC;
+
+SELECT * FROM dept_info_sales_devlp
